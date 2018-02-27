@@ -12,6 +12,26 @@
 		6. Остановите сервер
 */
 
+var http = require("http");
+var fs = require("fs");
+http.createServer(function foo(req, res){
+	res.writeHead(200, {
+		'Content-Type': 'text/html;charset=utf-8' });	// - верните статус успешного выполнения запроса
+		
+		res.write("Hello from Vasya!");
+
+		setTimeout(function(){
+			fs.readFile("index.html", function(err, content){
+				res.write(decodeURIComponent(content));
+				res.end("<br>ok");
+			});
+			
+    }, 2000);
+
+}).listen(8080);
+
+
+
 /*
  *	ЗАДАНИЕ 2
 
